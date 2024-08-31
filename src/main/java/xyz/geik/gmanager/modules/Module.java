@@ -43,46 +43,16 @@ public abstract class Module {
      */
     private final List<BaseCommand> commandList = new ArrayList<>();
 
-    private OkaeriConfig config;
-    private OkaeriConfig lang;
-    /**
-     * -- GETTER --
-     *  Gets the current
-     *  of this Addon.
-     *
-     * @return the current State of this Addon.
-     *
-     * -- SETTER --
-     *  Sets the addon's state.
-     *
-     * @param state the state to set
-
-     */
     @Setter
     @Getter
     private State state;
-    /**
-     * -- SETTER --
-     *  Set this addons description
-     *
-     * @param description - description
-     */
+
     @Setter
     private ModuleDescription description;
-    /**
-     * -- SETTER --
-     *  Set this addon's data folder
-     *
-     * @param file - data folder
-     */
+
     @Setter
     private File dataFolder;
-    /**
-     * -- SETTER --
-     *  Set the file that contains this addon
-     *
-     * @param f the file to set
-     */
+
     @Setter
     private File file;
     private final Map<String, ModuleRequestHandler> requestHandlers = new HashMap<>();
@@ -159,19 +129,6 @@ public abstract class Module {
     }
 
     /**
-     * @return the addon's default config file
-     */
-    public OkaeriConfig getConfig() {
-        if (config == null) {
-            try {
-                saveDefaultConfig();
-            }
-            catch (Exception ignored) {}
-        }
-        return config;
-    }
-
-    /**
      * @return Logger
      */
     public Logger getLogger() {
@@ -222,7 +179,7 @@ public abstract class Module {
      * Reloads config file
      * @since release
      */
-    public void reloadConfig() {
+    public void reloadConfig(OkaeriConfig config) {
         if (config != null)
             config.load(true);
     }
@@ -231,7 +188,7 @@ public abstract class Module {
      * Reloads lang file
      * @since release
      */
-    public void reloadLang() {
+    public void reloadLang(OkaeriConfig lang) {
         if (lang != null)
             lang.load(true);
     }
@@ -240,7 +197,7 @@ public abstract class Module {
      * Saves the addon's config.yml file to the addon's data folder and loads it. If
      * the file exists already, it will not be replaced.
      */
-    public void saveDefaultConfig() {
+    public void saveDefaultConfig(OkaeriConfig config) {
         config = ConfigManager.create(ConfigFile.class, (it) -> {
             it.withConfigurer(new YamlBukkitConfigurer());
             it.withBindFile(new File(dataFolder, "config.yml"));
@@ -254,12 +211,12 @@ public abstract class Module {
      * If there is no any lang class
      * then loads default lang file of addon.
      */
-    public void saveLang(Class<OkaeriConfig> defaultLang, String langPath) {
+    public void saveLang(OkaeriConfig defaultLang, String langPath) {
         String langName = GManager.getConfigFile().getSettings().getLang();
         try {
             Class langClass = Class.forName(langPath + langName);
             Class<OkaeriConfig> languageClass = langClass;
-            lang = ConfigManager.create(languageClass, (it) -> {
+            ConfigManager.create(languageClass, (it) -> {
                 it.withConfigurer(new YamlBukkitConfigurer());
                 it.withBindFile(new File(getDataFolder() + "/lang", langName + ".yml"));
                 it.saveDefaults();
@@ -269,7 +226,8 @@ public abstract class Module {
         catch (ClassNotFoundException exception) {
             this.getPlugin().logError("Couldn't find the [" + langPath + "] path for " + langName + " lang.");
             this.getPlugin().logError("Loading default..");
-            lang = ConfigManager.create(defaultLang, (it) -> {
+            Class<OkaeriConfig> langClass = (Class<OkaeriConfig>) defaultLang.getClass();
+            ConfigManager.create(langClass, (it) -> {
                 it.withConfigurer(new YamlBukkitConfigurer());
                 it.withBindFile(new File(getDataFolder() + "/lang", langName + ".yml"));
                 it.saveDefaults();
