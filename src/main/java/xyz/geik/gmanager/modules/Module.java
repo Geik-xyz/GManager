@@ -197,8 +197,8 @@ public abstract class Module {
      * Saves the addon's config.yml file to the addon's data folder and loads it. If
      * the file exists already, it will not be replaced.
      */
-    public void saveDefaultConfig(OkaeriConfig config) {
-        config = ConfigManager.create(ConfigFile.class, (it) -> {
+    public OkaeriConfig saveDefaultConfig(OkaeriConfig config) {
+        return ConfigManager.create(ConfigFile.class, (it) -> {
             it.withConfigurer(new YamlBukkitConfigurer());
             it.withBindFile(new File(dataFolder, "config.yml"));
             it.saveDefaults();
@@ -211,12 +211,13 @@ public abstract class Module {
      * If there is no any lang class
      * then loads default lang file of addon.
      */
-    public void saveLang(OkaeriConfig defaultLang, String langPath) {
+    public OkaeriConfig saveLang(OkaeriConfig defaultLang, String langPath) {
+        OkaeriConfig langFile;
         String langName = GManager.getConfigFile().getSettings().getLang();
         try {
             Class langClass = Class.forName(langPath + langName);
             Class<OkaeriConfig> languageClass = langClass;
-            ConfigManager.create(languageClass, (it) -> {
+            langFile = ConfigManager.create(languageClass, (it) -> {
                 it.withConfigurer(new YamlBukkitConfigurer());
                 it.withBindFile(new File(getDataFolder() + "/lang", langName + ".yml"));
                 it.saveDefaults();
@@ -227,13 +228,14 @@ public abstract class Module {
             this.getPlugin().logError("Couldn't find the [" + langPath + "] path for " + langName + " lang.");
             this.getPlugin().logError("Loading default..");
             Class<OkaeriConfig> langClass = (Class<OkaeriConfig>) defaultLang.getClass();
-            ConfigManager.create(langClass, (it) -> {
+            langFile = ConfigManager.create(langClass, (it) -> {
                 it.withConfigurer(new YamlBukkitConfigurer());
                 it.withBindFile(new File(getDataFolder() + "/lang", langName + ".yml"));
                 it.saveDefaults();
                 it.load(true);
             });
         }
+        return langFile;
     }
 
     /**
