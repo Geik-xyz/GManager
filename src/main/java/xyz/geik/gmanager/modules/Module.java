@@ -30,7 +30,7 @@ import xyz.geik.gmanager.api.modules.requests.ModuleRequestHandler;
 import xyz.geik.gmanager.configuration.ConfigFile;
 
 /**
- * Add-on class for BentoBox. Extend this to create an add-on. The operation
+ * Add-on class for GManager. Extend this to create an add-on. The operation
  * and methods are very similar to Bukkit's JavaPlugin.
  *
  * @author poyraz.inan
@@ -113,7 +113,7 @@ public abstract class Module {
         DISABLED,
 
         /**
-         * The addon has not been loaded because it requires a different version of BentoBox or of the server software.
+         * The addon has not been loaded because it requires a different version of GManager or of the server software.
          */
         INCOMPATIBLE,
 
@@ -427,8 +427,7 @@ public abstract class Module {
     }
 
     /**
-     * Called when all addons have been loaded by BentoBox
-     * @since 1.8.0
+     * Called when all addons have been loaded by GManager
      */
     public void allLoaded() {}
 }

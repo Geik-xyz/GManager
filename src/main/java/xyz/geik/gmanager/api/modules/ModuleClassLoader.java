@@ -74,8 +74,8 @@ public class ModuleClassLoader extends URLClassLoader {
                 throw new InvalidModuleFormatException("addon.yml does not define a main class!");
             }
             javaClass = Class.forName(mainClass, true, this);
-            if (mainClass.startsWith("world.bentobox.bentobox")) {
-                throw new InvalidModuleFormatException("Package declaration cannot start with 'world.bentobox.bentobox'");
+            if (mainClass.startsWith("xyz.geik.gmanager")) {
+                throw new InvalidModuleFormatException("Package declaration cannot start with 'xyz.geik.gmanager'");
             }
         } catch (Exception e) {
             throw new InvalidDescriptionException("Could not load '" + jarFile.getName() + "' in folder '" + jarFile.getParent() + "' - " + e.getMessage());
@@ -146,7 +146,7 @@ public class ModuleClassLoader extends URLClassLoader {
                 throw new InvalidModuleDescriptionException("Provided API version '" + apiVersion + "' is not valid. It must only contain digits and dots and not end with a dot.");
             }
             if (apiVersion.contains("-SNAPSHOT")) {
-                GManager.getInstance().logWarning(data.getString("name") + " addon depends on development version of BentoBox plugin. Some functions may be not implemented.");
+                GManager.getInstance().logWarning(data.getString("name") + " addon depends on development version of GManager plugin. Some functions may be not implemented.");
             }
             builder.apiVersion(apiVersion);
         }

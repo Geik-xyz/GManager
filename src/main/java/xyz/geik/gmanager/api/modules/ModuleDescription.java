@@ -40,7 +40,7 @@ public final class ModuleDescription {
      */
     private final @NonNull Material icon;
     /**
-     * Minimum BentoBox version this addon requires in order to work properly.
+     * Minimum GManager version this addon requires in order to work properly.
      * Defaults to {@code "1"}.
      * @since 1.11.0
      */
@@ -133,22 +133,22 @@ public final class ModuleDescription {
     }
 
     /**
-     * Returns the minimum BentoBox version this addon requires in order to work properly.
+     * Returns the minimum GManager version this addon requires in order to work properly.
      * <br/>
      * Examples:
      * <ul>
-     *     <li>{@code "1"} means that the addon relies on BentoBox {@code 1.0.0} or higher.</li>
-     *     <li>Similarly, {@code "2"} sets the requirement to BentoBox {@code 2.0.0} or higher.</li>
+     *     <li>{@code "1"} means that the addon relies on GManager {@code 1.0.0} or higher.</li>
+     *     <li>Similarly, {@code "2"} sets the requirement to GManager {@code 2.0.0} or higher.</li>
      *     <li>
      *         More specific versions can be provided:
      *         <ul>
-     *             <li>{@code "1.10"} -> BentoBox {@code 1.10.0} or higher.</li>
-     *             <li>{@code "1.9.2"} -> BentoBox {@code 1.9.2} or higher.</li>
+     *             <li>{@code "1.10"} -> GManager {@code 1.10.0} or higher.</li>
+     *             <li>{@code "1.9.2"} -> GManager {@code 1.9.2} or higher.</li>
      *         </ul>
      *     </li>
      * </ul>
      * Defaults to {@code "1"}.
-     * @return the minimum BentoBox version this addon requires in order to work properly.
+     * @return the minimum GManager version this addon requires in order to work properly.
      */
     @NonNull
     public String getApiVersion() {
@@ -254,8 +254,8 @@ public final class ModuleDescription {
         }
 
         /**
-         * Sets the minimum BentoBox version this addon requires in order to work properly.
-         * @param apiVersion the minimum BentoBox version this addon requires in order to work properly.
+         * Sets the minimum GManager version this addon requires in order to work properly.
+         * @param apiVersion the minimum GManager version this addon requires in order to work properly.
          * @since 1.11.0
          * @see ModuleDescription#getApiVersion()
          */

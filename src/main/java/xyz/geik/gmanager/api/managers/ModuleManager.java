@@ -172,7 +172,7 @@ public class ModuleManager {
             } else {
                 // Try to load it as an addon
                 GManager.getInstance()
-                        .log("Failed to load " + f.getName() + ", trying to load it as a BentoBox addon");
+                        .log("Failed to load " + f.getName() + ", trying to load it as a GManager addon");
                 // Addon not pladdon
                 ModuleClassLoader moduleClassLoader = new ModuleClassLoader(this, data, f,
                         this.getClass().getClassLoader());
@@ -203,12 +203,12 @@ public class ModuleManager {
         // Add it to the list of addons
         modules.remove(module);
         modules.add(module);
-        // Checks if this addon is compatible with the current BentoBox version.
-        if (!isAddonCompatibleWithBentoBox(module)) {
+        // Checks if this addon is compatible with the current GManager version.
+        if (!isAddonCompatibleWithGManager(module)) {
             // It is not, abort.
-            plugin.logError("Cannot load " + module.getDescription().getName() + " because it requires BentoBox version "
+            plugin.logError("Cannot load " + module.getDescription().getName() + " because it requires GManager version "
                     + module.getDescription().getApiVersion() + " or greater.");
-            plugin.logError("NOTE: Please update BentoBox.");
+            plugin.logError("NOTE: Please update GManager.");
             module.setState(Module.State.INCOMPATIBLE);
             return;
         }
@@ -308,16 +308,16 @@ public class ModuleManager {
         // Set the AddonState as "INCOMPATIBLE".
         module.setState(Module.State.INCOMPATIBLE);
         plugin.logWarning("Skipping " + module.getDescription().getName()
-                + " as it is incompatible with the current version of BentoBox or of server software...");
+                + " as it is incompatible with the current version of GManager or of server software...");
         plugin.logWarning("NOTE: The addon is referring to no longer existing classes.");
-        plugin.logWarning("NOTE: DO NOT report this as a bug from BentoBox.");
+        plugin.logWarning("NOTE: DO NOT report this as a bug from GManager.");
         StringBuilder a = new StringBuilder();
         module.getDescription().getAuthors().forEach(author -> a.append(author).append(" "));
         plugin.logError("Please report this stack trace to the addon's author(s): " + a);
         plugin.logStacktrace(e);
     }
 
-    private boolean isAddonCompatibleWithBentoBox(@NonNull Module module) {
+    private boolean isAddonCompatibleWithGManager(@NonNull Module module) {
         return true;
     }
 
@@ -569,7 +569,7 @@ public class ModuleManager {
 
 
     /**
-     * Notifies all addons that BentoBox has loaded all addons
+     * Notifies all addons that GManager has loaded all addons
      * @since 1.8.0
      */
     public void allLoaded() {

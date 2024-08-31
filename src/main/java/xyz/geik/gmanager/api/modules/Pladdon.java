@@ -16,7 +16,7 @@ import xyz.geik.gmanager.modules.Module;
  */
 public abstract class Pladdon extends JavaPlugin {
 
-    private static final String ADDONS_FOLDER = "BentoBox" + File.separator + "addons";
+    private static final String ADDONS_FOLDER = "GManager" + File.separator + "addons";
 
     /**
      * This must return a new instance of the addon. It is called when the Pladdon is loaded.
@@ -59,7 +59,7 @@ public abstract class Pladdon extends JavaPlugin {
                 getLogger().warning(getFile().getName() + " already is in the addons folder. Delete the one in the plugins folder.");
             }
         } else {
-            getLogger().severe("BentoBox addons folder could not be made! " + addons.getAbsolutePath());
+            getLogger().severe("GManager addons folder could not be made! " + addons.getAbsolutePath());
         }
 
     }
