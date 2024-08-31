@@ -211,7 +211,7 @@ public abstract class Module {
      * If there is no any lang class
      * then loads default lang file of addon.
      */
-    public OkaeriConfig saveLang(OkaeriConfig defaultLang, String langPath) {
+    public OkaeriConfig saveLang(Class defaultLang, String langPath) {
         OkaeriConfig langFile;
         String langName = GManager.getConfigFile().getSettings().getLang();
         try {
@@ -227,8 +227,8 @@ public abstract class Module {
         catch (ClassNotFoundException exception) {
             this.getPlugin().logError("Couldn't find the [" + langPath + "] path for " + langName + " lang.");
             this.getPlugin().logError("Loading default..");
-            Class<OkaeriConfig> langClass = (Class<OkaeriConfig>) defaultLang.getClass();
-            langFile = ConfigManager.create(langClass, (it) -> {
+            Class<OkaeriConfig> languageClass = defaultLang;
+            langFile = ConfigManager.create(languageClass, (it) -> {
                 it.withConfigurer(new YamlBukkitConfigurer());
                 it.withBindFile(new File(getDataFolder() + "/lang", langName + ".yml"));
                 it.saveDefaults();
