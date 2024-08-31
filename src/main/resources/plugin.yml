@@ -1,0 +1,11 @@
+name: GManager
+author: Geik
+main: xyz.geik.gmanager.GManager
+version: 100
+api-version: 1.13
+depend: [PlaceholderAPI]
+softdepend: [Vault, RoyaleEconomy, PlayerPoints, GrinGotts, ElementalGems, ASkyBlock, BentoBox, SuperiorSkyblock2, GriefPrevention, FabledSkyBlock, Lands, IridiumSkyblock, UltimateClaims]
+loadbefore: [AutoPickup]
+commands:
+  gmanager:
+    description: Main command of gmanager
