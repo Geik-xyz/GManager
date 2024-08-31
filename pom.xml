@@ -27,12 +27,14 @@
             <groupId>com.github.Geik-xyz</groupId>
             <artifactId>GLib</artifactId>
             <version>db36065e77</version>
+            <scope>compile</scope>
         </dependency>
         <!-- apache commons -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.15.0</version>
+            <scope>provided</scope>
         </dependency>
         <!-- PlaceholderAPI -->
         <dependency>
