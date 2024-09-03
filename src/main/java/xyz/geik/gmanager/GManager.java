@@ -65,7 +65,7 @@ public class GManager extends JavaPlugin {
     }
 
     public void onDisable() {
-        CommandManager.unregisterCommands();
+        //CommandManager.unregisterCommands();
         moduleManager.disableAddons();
     }
 

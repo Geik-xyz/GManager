@@ -233,10 +233,9 @@ public class ModuleManager {
     public void enableAddons() {
         if (getLoadedAddons().isEmpty())
             return;
-        plugin.log("Enabling game mode addons...");
         // Enable GameModes first, then other addons
         getLoadedAddons().stream().filter(a -> !a.getState().equals(Module.State.DISABLED)).forEach(this::enableAddon);
-        plugin.log("Enabling other addons...");
+        plugin.log("Enabling addons...");
         getLoadedAddons().stream().filter(a -> !a.getState().equals(Module.State.DISABLED)).forEach(this::enableAddon);
         // Set perms for enabled addons
         this.getEnabledAddons().forEach(this::setPerms);
